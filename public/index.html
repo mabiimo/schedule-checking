@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PMO Apps</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="frame">
+      <header class="topbar">
+        <div class="topbar-mark">
+          <span class="mark-dot"></span>
+          <span class="mark-text"
+            >PLAN<span class="mark-vs">/</span>ACTUAL</span
+          >
+        </div>
+        <span class="topbar-tag">Operational Data Check</span>
+      </header>
+
+      <main class="board">
+        <section class="intro">
+          <h1>Sirclo - PMO Check Schedule From Operator</h1>
+          <p>
+            Unggah jadwal rencana dan catatan aktual. Sistem mencocokkan
+            <em>tanggal, jam, dan brand</em>, lalu menandai setiap baris: sudah
+            selesai, belum, atau tidak tercatat sama sekali.
+          </p>
+        </section>
+
+        <section class="uploader">
+          <form id="checkForm">
+            <div class="dropzone-grid">
+              <div class="dropfield" data-role="plan">
+                <div class="dropfield-label">
+                  <span class="step-no">01</span>
+                  <div>
+                    <strong>PMO File</strong>
+                    <small>Tanggal · Start jam · Brand</small>
+                  </div>
+                </div>
+                <label class="dropfield-input" for="planFile">
+                  <input
+                    type="file"
+                    id="planFile"
+                    name="plan_file"
+                    accept=".xlsx,.xls"
+                    required
+                  />
+                  <span class="dz-icon">⇪</span>
+                  <span
+                    class="dz-text"
+                    data-default="Pilih atau seret file Data1.xlsx"
+                    >Choose File from PMO Plan format.xlsx</span
+                  >
+                </label>
+              </div>
+
+              <div class="dropfield" data-role="actual">
+                <div class="dropfield-label">
+                  <span class="step-no">02</span>
+                  <div>
+                    <strong>Operator File</strong>
+                    <small>Tanggal · Start jam · Brand · Status</small>
+                  </div>
+                </div>
+                <label class="dropfield-input" for="actualFile">
+                  <input
+                    type="file"
+                    id="actualFile"
+                    name="actual_file"
+                    accept=".xlsx,.xls"
+                    required
+                  />
+                  <span class="dz-icon">⇪</span>
+                  <span
+                    class="dz-text"
+                    data-default="Pilih atau seret file Data2.xlsx"
+                    >Choose File from Operator Plan format.xlsx</span
+                  >
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-row">
+              <label for="statusFilter" class="filter-label"
+                >Filter Status</label
+              >
+              <select id="statusFilter" name="status_filter">
+                <option value="Semua">All Status</option>
+                <option value="Selesai">Ditemukan</option>
+                <option value="Belum">Belum</option>
+                <option value="Tidak Ditemukan">Tidak Ditemukan</option>
+              </select>
+            </div>
+
+            <div class="action-row">
+              <button type="submit" id="previewBtn" class="btn btn-ghost">
+                Preview
+              </button>
+              <button type="button" id="downloadBtn" class="btn btn-primary">
+                Download Excel
+              </button>
+              <button
+                type="button"
+                id="downloadPptxBtn"
+                class="btn btn-secondary"
+              >
+                Download PPT
+              </button>
+            </div>
+
+            <p class="error-msg" id="errorMsg" hidden></p>
+          </form>
+        </section>
+
+        <section class="results" id="resultsSection" hidden>
+          <div class="summary-row" id="summaryRow"></div>
+
+          <div class="table-wrap">
+            <table id="resultsTable">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Start Brand</th>
+                  <th>Brand</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="resultsBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footnote">
+        <span>Lock Check: Date + Start Time + Brand</span>
+        <span class="legend">
+          <span class="legend-dot dot-selesai"></span>Ditemukan
+          <span class="legend-dot dot-belum"></span>Belum
+          <span class="legend-dot dot-tidak"></span>Tidak Ditemukan
+        </span>
+      </footer>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay" hidden>
+      <div class="loading-box">
+        <div class="spinner"></div>
+        <span id="loadingText">Loading ...</span>
+      </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

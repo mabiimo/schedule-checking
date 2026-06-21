@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.git/
+.gitignore
+*.xlsx
+*.pptx
+.DS_Store
+node_modules/
