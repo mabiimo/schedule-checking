@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import io
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
 
 from fastapi import FastAPI, File, Form, UploadFile
 from fastapi.responses import JSONResponse, StreamingResponse
 
-from api.checker import (
+from checker import (
     DataValidationError,
     FILTER_SEMUA,
     build_summary,
